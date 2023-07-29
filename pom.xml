@@ -12,11 +12,25 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+		<mule.runtime.version>4.4.0</mule.runtime.version>
+		<mule.home>${MULE_HOME}</mule.home>
 		<app.runtime>4.4.0-20220824</app.runtime>
 		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
 	</properties>
-
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Release</name>
+			<url>file://D:/localRepo</url>
+			<layout>default</layout>
+		</repository>
+		<snapshotRepository>
+			<id>internal.repo</id>
+			<name>Snapshot</name>
+			<url>file://D:/localRepo</url>
+			<layout>default</layout>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -27,7 +41,35 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>standalone</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<configuration>
+							<standaloneDeployment>
+								<muleVersion>${mule.runtime.version}</muleVersion>
+								<muleHome>${mule.home}</muleHome>
+								<applicationName>${artifactId}</applicationName>
+							</standaloneDeployment>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<dependencies>
 	</dependencies>
 
@@ -50,7 +92,7 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mulesoft-releases</id>
