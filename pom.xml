@@ -71,6 +71,18 @@
 		</profile>
 	</profiles>
 	<dependencies>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-sockets-connector</artifactId>
+			<version>1.2.2</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-http-connector</artifactId>
+			<version>1.7.3</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -92,7 +104,6 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mulesoft-releases</id>
